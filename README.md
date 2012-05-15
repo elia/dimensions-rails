@@ -1,6 +1,11 @@
 # Dimensions::Rails
 
-TODO: Write a gem description
+Use [dimensions](http://github.com/sstephenson/dimensions) by [@sstephenson](http://github.com/sstephenson) to add automatic images size and improve browser rendering.
+
+### How this improves browser rendering?
+
+See: https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
+
 
 ## Installation
 
@@ -18,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Just use the `image_tag` rails helper as usual, the `:size` options will be magically added by `dimensions-rails` elves!
 
 ## Contributing
 
