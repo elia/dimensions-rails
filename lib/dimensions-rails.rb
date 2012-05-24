@@ -12,7 +12,7 @@ module Dimensions
       # 
       # How this improves browser rendering?
       # https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
-      #
+      # 
       def image_tag source, options = {}
         unless options[:size]
           fs_path = asset_paths.asset_for(source, nil).to_path
