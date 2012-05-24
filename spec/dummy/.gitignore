@@ -1,0 +1,12 @@
+.bundle
+db/*.sqlite3
+db/dump
+log/*.log
+tmp/
+.sass-cache/
+bin/
+.tm_properties
+__*
+*.erb
+.DS_Store
+/bin

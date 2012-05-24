@@ -16,9 +16,3 @@
 /log/*.log
 /pkg/
 
-test/tmp
-test/version_tmp
-test/dummy/db/*.sqlite3
-test/dummy/log/*.log
-test/dummy/tmp/
-test/dummy/.sass-cache
