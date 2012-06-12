@@ -1,6 +1,14 @@
 # Dimensions::Rails
 
-Use [dimensions](http://github.com/sstephenson/dimensions) by [@sstephenson](http://github.com/sstephenson) to add automatic images size and improve browser rendering.
+```erb
+<%= image_tag 'logo.png' %>
+```
+
+```html
+<img src="/assets/logo.png" width="230" height="80">
+```
+
+It uses [dimensions](http://github.com/sstephenson/dimensions) by [@sstephenson](http://github.com/sstephenson) to add automatic images size and improve browser rendering.
 
 ### How this improves browser rendering?
 
