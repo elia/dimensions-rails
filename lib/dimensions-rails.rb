@@ -17,7 +17,7 @@ module Dimensions
         unless options[:size]
           fs_path = asset_paths.asset_for(source, nil).blank? ? "" : asset_paths.asset_for(source, nil).to_path
           
-          options[:width], options[:height] = fs_path.blank? ? [0,0] : ::Dimensions.dimensions(fs_path)
+          options[:width], options[:height] = ::Dimensions.dimensions(fs_path) if fs_path.present?
         end
         super
       end
