@@ -15,9 +15,10 @@ module Dimensions
       # 
       def image_tag source, options = {}
         unless options[:size]
-          fs_path = asset_paths.asset_for(source, nil).blank? ? "" : asset_paths.asset_for(source, nil).to_path
-          
-          options[:width], options[:height] = ::Dimensions.dimensions(fs_path) if fs_path.present?
+          fs_path = asset_paths.asset_for(source, nil)
+          if fs_path.present?
+            options[:width], options[:height] = ::Dimensions.dimensions(fs_path.to_path)
+          end
         end
         super
       end
