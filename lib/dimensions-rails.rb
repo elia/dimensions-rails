@@ -14,7 +14,7 @@ module Dimensions
       # https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
       # 
       def image_tag source, options = {}
-        unless options[:size]
+        unless options[:size] or options[:width] or options[:height]
           fs_path = asset_paths.asset_for(source, nil)
           if fs_path.present?
             options[:width], options[:height] = ::Dimensions.dimensions(fs_path.to_path)
