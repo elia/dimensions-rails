@@ -1,5 +1,7 @@
 # Dimensions::Rails
 
+[![Build Status](https://secure.travis-ci.org/elia/dimensions-rails.png?branch=master)](http://travis-ci.org/elia/dimensions-rails)
+
 ```erb
 <%= image_tag 'logo.png' %>
 ```
