@@ -16,14 +16,11 @@ module Dimensions
       #
       def image_tag source, options = {}
         unless options[:size] or options[:width] or options[:height]
-          fs_path = asset_paths.asset_for(source, nil)
-          if fs_path.present?
-            options[:width], options[:height] = ::Dimensions.dimensions(fs_path.to_path)
-          else
-            fs_path = ::Rails.root.join File.join 'public', source
-            if File.exist? fs_path
-              options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
-            end
+          fs_path = asset_paths.asset_for(source, nil) if respond_to? :asset_paths
+          fs_path = fs_path.present? ? fs_path.to_path : File.join(::Rails.public_path, source)
+
+          if fs_path.present? and File.exist? fs_path
+            options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
           end
         end
         super
