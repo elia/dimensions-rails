@@ -16,7 +16,12 @@ module Dimensions
       #
       def image_tag source, options = {}
         unless options[:size] or options[:width] or options[:height]
-          fs_path = asset_paths.asset_for(source, nil) if respond_to? :asset_paths
+          fs_path = begin
+                      asset_paths.asset_for(source, nil)
+                    rescue Sprockets::FileOutsidePaths
+                      nil
+                    end if respond_to? :asset_paths
+
           fs_path = fs_path.present? ? fs_path.to_path : File.join(::Rails.public_path, source)
 
           if fs_path.present? and File.exist? fs_path
@@ -31,7 +36,6 @@ module Dimensions
     class Railtie < ::Rails::Railtie
       config.dimensions = ActiveSupport::OrderedOptions.new
       config.dimensions.add_size_by_default = true
-
 
       initializer 'dimensions.initialize' do
         ActiveSupport.on_load(:action_view) do
