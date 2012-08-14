@@ -31,6 +31,8 @@ gem 'dimensions-rails'
 
 Just use the `image_tag` rails helper as usual, the `:size` options will be magically added by `dimensions-rails` elves!
 
+If for any reason you need to disable `dimensions-rails` just pass `:dimensions => false` to `image_tag`.
+
 
 ## Contributing
 

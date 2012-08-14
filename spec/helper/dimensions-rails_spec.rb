@@ -18,4 +18,10 @@ describe ApplicationHelper, :type => :helper do
     tag.should match('height="64"')
     tag.should match('width="50"')
   end
+
+  it 'is disabled passing false to the :dimensions option' do
+    tag = helper.image_tag('/outsiders/rails.png', :dimensions => false)
+    tag.should_not match('height=')
+    tag.should_not match('width=')
+  end
 end

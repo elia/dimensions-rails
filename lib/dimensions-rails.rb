@@ -15,12 +15,14 @@ module Dimensions
       # https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
       #
       def image_tag source, options = {}
-        unless options[:size] or options[:width] or options[:height]
+        disable_dimensions = options[:dimensions] == false
+
+        unless disable_dimensions or options[:size] or options[:width] or options[:height]
           fs_path = begin
-                      asset_paths.asset_for(source, nil)
-                    rescue Sprockets::FileOutsidePaths
-                      nil
-                    end if respond_to? :asset_paths
+            asset_paths.asset_for(source, nil)
+          rescue Sprockets::FileOutsidePaths
+            nil
+          end if respond_to? :asset_paths
 
           fs_path = fs_path.present? ? fs_path.to_path : File.join(::Rails.public_path, source)
 
