@@ -1,6 +1,10 @@
 # coding: utf-8
-require File.expand_path('../lib/dimensions-rails/version', __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 
+# Maintain your gem's version:
+require 'dimensions-rails/version'
+
+# Describe your gem and declare its dependencies:
 Gem::Specification.new do |gem|
   gem.authors       = ['Elia Schito']
   gem.email         = ['elia@schito.me']
@@ -16,7 +20,9 @@ Gem::Specification.new do |gem|
   gem.version       = Dimensions::Rails::VERSION
 
   gem.add_runtime_dependency 'dimensions'
-  gem.add_runtime_dependency 'railties',      '>= 3.0'
-  gem.add_runtime_dependency 'actionpack',    '>= 3.0'
-  gem.add_runtime_dependency 'activesupport', '>= 3.0'
+  gem.add_runtime_dependency 'railties',        '~> 3.0'
+  gem.add_runtime_dependency 'actionpack',      '~> 3.0'
+  gem.add_runtime_dependency 'activesupport',   '~> 3.0'
+  gem.add_development_dependency 'rails',       '~> 3.0'
+  gem.add_development_dependency 'rspec-rails', '~> 2.0'
 end

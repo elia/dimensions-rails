@@ -2,6 +2,7 @@ require 'dimensions-rails/version'
 require 'active_support/ordered_options'
 require 'rails/railtie'
 require 'dimensions'
+require 'ostruct'
 
 module Dimensions
   module Rails
@@ -14,9 +15,20 @@ module Dimensions
       # https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
       #
       def image_tag source, options = {}
-        unless options[:size]
-          fs_path = ::Rails.application.assets.find_asset(source).pathname.to_s
-          options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
+        disable_dimensions = options[:dimensions] == false
+
+        unless disable_dimensions or options[:size] or options[:width] or options[:height]
+          fs_path = begin
+            asset_paths.asset_for(source, nil)
+          rescue Sprockets::FileOutsidePaths
+            nil
+          end if respond_to? :asset_paths
+
+          fs_path = fs_path.present? ? fs_path.to_path : File.join(::Rails.public_path, source)
+
+          if fs_path.present? and File.exist? fs_path
+            options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
+          end
         end
         super
       end
@@ -26,7 +38,6 @@ module Dimensions
     class Railtie < ::Rails::Railtie
       config.dimensions = ActiveSupport::OrderedOptions.new
       config.dimensions.add_size_by_default = true
-
 
       initializer 'dimensions.initialize' do
         ActiveSupport.on_load(:action_view) do
