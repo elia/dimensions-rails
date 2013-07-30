@@ -18,13 +18,8 @@ module Dimensions
         disable_dimensions = options[:dimensions] == false
 
         unless disable_dimensions or options[:size] or options[:width] or options[:height]
-          fs_path = begin
-            asset_paths.asset_for(source, nil)
-          rescue Sprockets::FileOutsidePaths
-            nil
-          end if respond_to? :asset_paths
-
-          fs_path = fs_path.present? ? fs_path.to_path : File.join(::Rails.public_path, source)
+          fs_path = ::Rails.application.assets.find_asset(source)
+          fs_path = fs_path.present? ? fs_path.pathname : File.join(::Rails.public_path, source)
 
           if fs_path.present? and File.exist? fs_path
             options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
