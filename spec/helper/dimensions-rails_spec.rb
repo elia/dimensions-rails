@@ -24,4 +24,9 @@ describe ApplicationHelper, :type => :helper do
     tag.should_not match('height=')
     tag.should_not match('width=')
   end
+
+  it 'should not add dimensions attribute to image' do
+    tag = helper.image_tag('/outsiders/rails.png', :dimensions => false)
+    tag.should_not match('dimensions="false"')
+  end
 end
