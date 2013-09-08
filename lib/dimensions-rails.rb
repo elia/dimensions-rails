@@ -15,7 +15,7 @@ module Dimensions
       # https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
       #
       def image_tag source, options = {}
-        disable_dimensions = options[:dimensions] == false
+        disable_dimensions = options.delete(:dimensions) == false
 
         unless disable_dimensions or options[:size] or options[:width] or options[:height]
           fs_path = ::Rails.application.assets.find_asset(source)
