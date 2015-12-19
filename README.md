@@ -10,10 +10,10 @@
 <img src="/assets/logo.png" width="230" height="80">
 ```
 
-It uses [dimensions](http://github.com/sstephenson/dimensions) by [@sstephenson](http://github.com/sstephenson) to add automatic images size and improve browser rendering.
+It uses [dimensions](http://github.com/sstephenson/dimensions) by [@sstephenson](http://github.com/sstephenson) to automatically add size attributes to image tags, which speeds browser rendering.
 
 
-### How this improves browser rendering?
+### How does this improve browser rendering?
 
 See: https://developers.google.com/speed/docs/best-practices/rendering#SpecifyImageDimensions
 
