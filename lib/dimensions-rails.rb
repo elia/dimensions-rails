@@ -18,16 +18,24 @@ module Dimensions
         disable_dimensions = options.delete(:dimensions) == false
 
         unless disable_dimensions or options[:size] or options[:width] or options[:height]
-          fs_path = ::Rails.application.assets.find_asset(source)
-          fs_path = fs_path.present? ? fs_path.pathname : File.join(::Rails.public_path, source)
+          fs_path = if ::Rails.application.config.assets.compile
+                      ::Rails.application.assets.find_asset(source)
+                        .try(:pathname)
+                    else
+                      assets_manifest.assets[source]
+                    end
 
-          if fs_path.present? and File.exist? fs_path
+          unless fs_path.present?
+            fs_path = File.join(::Rails.public_path, source)
+          end
+
+          if File.exist? fs_path
             options[:width], options[:height] = ::Dimensions.dimensions(fs_path)
           end
         end
+
         super
       end
-
     end
 
     class Railtie < ::Rails::Railtie
